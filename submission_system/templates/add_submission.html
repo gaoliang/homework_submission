@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load custom_markdown %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap-markdown.min.css' %}">
+    <link href="{% static 'css/default.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>{{ homework.courser.name }}作业"{{ homework.name }}"</h1>
+        <hr>
+        <h4>作业内容</h4>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>{{ homework.content|custom_markdown }}</p>
+            </div>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="content">你的回答(编辑器支持markdown语法 <a href="http://www.jianshu.com/p/815788f4b01d">快速入门</a>)</label>
+            <textarea id="content" name="content" data-provide="markdown" rows="10"></textarea>
+            <label for="code">如果你不会使用markdown语法输入代码，请务必将代码填写在这里↓</label>
+            <textarea class="form-control" rows="10" name="code" id="code"></textarea>
+            <label for=picture>如果你需要上传图片，请在这里选择</label>
+            <input id="picture" accept="image/*" type="file" name='picture'>
+            <hr>
+            <button type="submit" class="btn btn-success">提交</button>
+            <br>
+            <br>
+        </form>
+    </div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/bootstrap-markdown.js' %}"></script>
+    <script src="{% static 'js/bootstrap-markdown.zh.js' %}"></script>
+    <script src="{% static 'js/markdown.js' %}"></script>
+    <script src="{% static 'js/to-markdown.js' %}"></script>
+    <script src="{% static 'js/highlight.pack.js' %}"></script>
+    <script src="{% static 'js/tabIndent.js' %}"></script>
+    <script>
+        (function ($) {
+            $.fn.markdown.messages.zh = {
+                'Bold': "粗体",
+                'Italic': "斜体",
+                'Heading': "标题",
+                'URL/Link': "链接",
+                'Image': "图片",
+                'List': "列表",
+                'Unordered List': "无序列表",
+                'Ordered List': "有序列表",
+                'Code': "代码",
+                'Quote': "引用",
+                'Preview': "预览",
+                'strong text': "粗体",
+                'emphasized text': "强调",
+                'heading text': "标题",
+                'enter link description here': "输入链接说明",
+                'Insert Hyperlink': "URL地址",
+                'enter image description here': "输入图片说明",
+                'Insert Image Hyperlink': "图片URL地址",
+                'enter image title here': "在这里输入图片标题",
+                'list text here': "这里是列表文本",
+                'code text here': "这里输入代码",
+                'quote here': "这里输入引用文本"
+            };
+
+        }(jQuery));
+        $("#content").markdown({
+            language: 'zh'
+        });
+        hljs.initHighlightingOnLoad();
+        {#        实现textarea的tab键缩进功能#}
+        document.body.enableTextareaDevTab();
+$(window).load(function(){
+ 
+    $(".panel-body img").addClass("img-responsive center-block");
+ 
+})   
+ </script>
+{% endblock %}

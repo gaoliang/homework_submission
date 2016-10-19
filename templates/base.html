@@ -1,0 +1,84 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{{ page.keywords }}"/>
+    <meta name="description" content="{{ page.description }}"/>
+    <meta name="author" content="">
+    <title>
+        {% block title %}
+            {{ self.title }}
+        {% endblock %}
+    </title>
+    {# Global stylesheets #}
+    <link href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> -->
+    <!-- <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet"> -->
+    <link href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    {##}
+    <!-- <link href=" -->
+    <!-- " rel="stylesheet"> -->
+
+    {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+
+</head><!--/head-->
+
+
+<body class="{% block body_class %}{% endblock %}">
+
+<!--start-header-->
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+<!--end-header-->
+
+
+{% block content %}
+{% endblock %}
+
+{# Global javascript #}
+<!-- <script type="text/javascript" src="{% static 'js/website.js' %}"></script> -->
+
+<!--start-footer-->
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}
+<!--end-footer-->
+
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script type="text/javascript" src="{% static 'js/jquery.js' %}"><\/script>')</script>
+<script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+    $.ajaxSetup({
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+    });
+    $(".logout-button").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "{% url 'data' 'logout' %}",
+            success: function (data, textStatus) {
+                location.replace("{% url 'index' %}");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+            }
+        });
+        return false;
+    });
+</script>
+{% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+{% endblock %}
+
+</body>
+</html>

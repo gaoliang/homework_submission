@@ -1,0 +1,58 @@
+[
+  {
+    "model": "submission_system.courser",
+    "pk": 1,
+    "fields": {
+      "name": "\u8ba1\u7b97\u673a\u79d1\u5b66\u5bfc\u8bba",
+      "name_en": "Introduction_to_Computer_Science"
+    }
+  },
+  {
+    "model": "submission_system.courser",
+    "pk": 2,
+    "fields": {
+      "name": "ACM",
+      "name_en": "ACM"
+    }
+  },
+  {
+    "model": "submission_system.courser",
+    "pk": 3,
+    "fields": {
+      "name": "C#",
+      "name_en": "C#"
+    }
+  },
+  {
+    "model": "submission_system.courser",
+    "pk": 4,
+    "fields": {
+      "name": "C++",
+      "name_en": "C++"
+    }
+  },
+  {
+    "model": "submission_system.courser",
+    "pk": 5,
+    "fields": {
+      "name": "JAVA",
+      "name_en": "JAVA"
+    }
+  },
+  {
+    "model": "submission_system.courser",
+    "pk": 6,
+    "fields": {
+      "name": "Linux",
+      "name_en": "Linux"
+    }
+  },
+  {
+    "model": "submission_system.courser",
+    "pk": 7,
+    "fields": {
+      "name": "Python",
+      "name_en": "Python"
+    }
+  }
+]

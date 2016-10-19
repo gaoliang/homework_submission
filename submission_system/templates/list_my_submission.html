@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block extra_css %}
+    {% load staticfiles %}
+    <link href="{% static 'css/default.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-table.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+
+        <h2>我完成的作业</h2>
+        <hr>
+        <h4>完成情况</h4>
+        <table id="table"
+               data-toggle="table"
+               data-url="{% url 'get_my_submissions' %}"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-page-list= "[20, 100, 200]"
+               data-classes="table table-hover table-condensed"
+               data-striped="true"
+        >
+            <thead>
+            <tr>
+                <th data-field="homework">作业</th>
+                <th data-field="courser">课程</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/highlight.pack.js' %}"></script>
+    <script src="{% static 'js/bootstrap-table.js' %}"></script>
+    <script src="{% static 'js/bootstrap-table-zh-CN.js' %}"></script>
+    <script>hljs.initHighlightingOnLoad();
+    $(window).load(function(){
+ 
+    $(".panel-body img").addClass("img-responsive center-block");
+ 
+})
+</script>
+        <script>
+            var $table = $('#table');
+            $(function () {
+                $table.on('click-row.bs.table', function (e, row, $element) {
+                    window.location.href = '{% url '_submission_detail' %}' + row.id;
+                    $('.success').removeClass('success');
+                    $($element).addClass('success');
+                });
+            });
+        </script>
+{% endblock %}

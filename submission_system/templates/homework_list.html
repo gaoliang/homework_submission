@@ -41,8 +41,10 @@
             $table.on('click-row.bs.table', function (e, row, $element) {
                 {% if user.is_superuser %}
                     window.location.href = '{% url '_homework_detail' %}' + row.id;
-                {% else %}
+                {% elif user.is_authenticated%}
                     window.location.href = '{% url '_add_submission' %}' + row.id;
+                {% else %}
+                    $("#login-modal").modal("show");
                 {% endif %}
                 $('.success').removeClass('success');
                 $($element).addClass('success');

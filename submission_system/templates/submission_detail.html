@@ -30,8 +30,8 @@
                 </div>
             {% endif %}
             {% if submission.picture %}
-            <img src="{{submission.picture.url}}" alt="picture open field" class="img-responsive center-block" >"
-{% endif %}
+                <img src="{{ submission.picture.url }}" alt="picture open field" class="img-responsive center-block">"
+            {% endif %}
         </div>
     </div>
 {% endblock %}
@@ -40,10 +40,10 @@
     <script src="{% static 'js/bootstrap-table.js' %}"></script>
     <script src="{% static 'js/bootstrap-table-zh-CN.js' %}"></script>
     <script>hljs.initHighlightingOnLoad();
-$(window).load(function(){
- 
-    $(".panel-body img").addClass("img-responsive center-block");
- 
-})
-</script>
+    $(window).on('load', function () {
+
+        $(".panel-body img").addClass("img-responsive center-block");
+
+    })
+    </script>
 {% endblock %}

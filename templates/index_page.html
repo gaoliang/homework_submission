@@ -1,7 +1,30 @@
 {% extends 'base.html' %}
 {% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
 {% endblock %}
 {% block content %}
+    <div class="grid">
+        <div class="grid-sizer"></div>
+        {% for work in works %}
+            <div class="grid-item {% if forloop.first %}{% else %}{% ifequal work.case 0 %}grid-item--height3
+            {% endifequal %}{% ifequal work.case 1 %}grid-item--height2{% endifequal %}{% endif %}
+            ">
+                <div class="mini-img">
+                    <img src="/static/img/{{ work.courser.name_en }}.png">
+                </div>
+
+                <div class="mini-title">
+                    <p><a href="
+
+                            {% if user.is_superuser %}{% url 'homework_detail' work.pk %}{% elif user.is_authenticated %}{% url 'add_submission' work.pk %}{% else %}#{% endif %}"
+                            {% if not user.is_authenticated %} data-toggle="modal"
+                          data-target="#login-modal"{% endif %}>{{ work.name }}</a></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
 {% block extra_js %}
+    <!-- 主要的,更新题目的js -->
+    <script src="/static/js/main.js"></script>
 {% endblock %}

@@ -1,0 +1,48 @@
+
+
+
+.main-content{
+	padding-top:70px;
+}
+
+
+
+/* fluid 5 columns */
+.grid-sizer,
+.grid-item { 
+	width: 22%;
+	height: 300px; 
+	margin-left: 30px;
+    margin-bottom: 20px;
+    background-color: #fcffd9;
+    border-radius: 15px;
+    box-shadow: 3px 3px 10px #888;
+    
+
+}
+/* 2 columns */
+.grid-item--height2 { height: 250px; }
+.grid-item--height3 { height: 320px; }
+
+
+.mini-img{
+	text-align: center;
+	height: 80%;
+}
+
+img{
+	margin-top: 10px;
+}
+
+
+
+
+
+
+.mini-title{
+	text-align: center
+	
+}
+
+
+

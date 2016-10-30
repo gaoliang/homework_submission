@@ -10,7 +10,11 @@ from submission_system.models import Homework, Courser, HomeworkAnswer
 
 
 def index_view(request):
-    return render(request, template_name='index_page.html', context={})
+    works = Homework.objects.all().order_by('-pk')
+    for index, work in enumerate(works):
+        work.case = index % 3
+    return render(request, template_name='index_page.html',
+                  context={'works': works,})
 
 
 @permission_required('submission_system.add_homework')
@@ -73,7 +77,7 @@ def add_submission(request, homework_id):
         if file:
             file.name = 'ppp'
         submission = HomeworkAnswer(code=request.POST['code'], content=request.POST['content'],
-                                    homework=Homework.objects.get(pk=homework_id),picture=file)
+                                    homework=Homework.objects.get(pk=homework_id), picture=file)
         submission.save()
         submission.creator = request.user
         print(submission.creator)
@@ -90,6 +94,7 @@ def submission_detail(request, submission_id):
     return render(request, 'submission_detail.html',
                   context={'submission': HomeworkAnswer.objects.get(pk=submission_id)})
 
+
 def get_my_submissions(request):
     json_data = {}
     recodes = []
@@ -98,10 +103,11 @@ def get_my_submissions(request):
     submissions = HomeworkAnswer.objects.filter(creator=request.user)
     json_data['total'] = submissions.count()
     for submission in submissions.all()[offset:offset + limit]:
-        recodes.append({'homework':submission.homework.name, 'courser': submission.homework.courser.name, 'id':submission.pk})
+        recodes.append(
+            {'homework': submission.homework.name, 'courser': submission.homework.courser.name, 'id': submission.pk})
     json_data['rows'] = recodes
     return JsonResponse(json_data)
 
 
 def list_my_submissions(request):
-    return render(request,"list_my_submission.html")
+    return render(request, "list_my_submission.html")

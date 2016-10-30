@@ -4,9 +4,17 @@ from django.db import models
 from auth_system.models import MyUser
 
 
+class Part(models.Model):
+    name = models.CharField(max_length=20, verbose_name="部门")
+
+    def __str__(self):
+        return self.name
+
+
 class Courser(models.Model):
     name = models.CharField(max_length=20, verbose_name='课程名称')
     name_en = models.CharField(max_length=50, verbose_name='英文名称', null=True)
+    part = models.ForeignKey(Part, verbose_name="所属部门", null=True)
 
     def __str__(self):
         return self.name

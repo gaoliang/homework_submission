@@ -1,72 +1,45 @@
 {% load staticfiles %}
-
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="{{ page.keywords }}"/>
-    <meta name="description" content="{{ page.description }}"/>
-    <meta name="author" content="">
-    <title>
-        {% block title %}
-            {{ self.title }}
-        {% endblock %}
-    </title>
-    {# Global stylesheets #}
-    <link href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> -->
-    <!-- <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet"> -->
-    <link href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    {##}
-    <!-- <link href=" -->
-    <!-- " rel="stylesheet"> -->
-
+    <meta charset="UTF-8">
+    <title>校科协作业平台</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/javascript" href="/static/js/bootstrap.js">
+    <link rel="stylesheet" type="text/css" href="/static/css/lr.css">
     {% block extra_css %}
-        {# Override this in templates to add extra stylesheets #}
     {% endblock %}
-
-</head><!--/head-->
-
-
-<body class="{% block body_class %}{% endblock %}">
-
-<!--start-header-->
+</head>
+<body>
 {% block header %}
-    {% include "header.html" %}
+    {% include 'header.html' %}
 {% endblock %}
-<!--end-header-->
-
-
-{% block content %}
-{% endblock %}
-
-{# Global javascript #}
-<!-- <script type="text/javascript" src="{% static 'js/website.js' %}"></script> -->
-
-<!--start-footer-->
-{% block footer %}
-    {% include "footer.html" %}
-{% endblock %}
-<!--end-footer-->
-
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script type="text/javascript" src="{% static 'js/jquery.js' %}"><\/script>')</script>
-<script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<div class="container main-content" style="padding-top: 70px">
+    {% block content %}
+    {% endblock %}
+</div>
+<script src="/static/js/jquery-3.1.1.min.js"></script>
 <script>
     $.ajaxSetup({
-        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
     });
+</script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/masonry.pkgd.min.js"></script>
+<script src="/static/js/jquery.gradientify.min.js"></script>
+
+<!-- 登录注册控件js -->
+<script src="/static/js/lr.js"></script>
+
+<script>
     $(".logout-button").click(function () {
         $.ajax({
             type: "POST",
-            url: "{% url 'data' 'logout' %}",
-            success: function (data, textStatus) {
+            url: "{% url 'logout' %}",
+            success: function (data) {
                 location.replace("{% url 'index' %}");
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -77,8 +50,6 @@
     });
 </script>
 {% block extra_js %}
-    {# Override this in templates to add extra javascript #}
 {% endblock %}
-
 </body>
 </html>

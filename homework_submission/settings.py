@@ -20,7 +20,7 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y9g6uml(l!91^xnnea)7e+zk1'
+SECRET_KEY = 'local'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -98,7 +98,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_FROM = 'local@sample.com'
 EMAIL_RECIPIENT_LIST = ['admin@sample.com']
@@ -137,11 +136,10 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = '/var/www/html/static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'auth_system.MyUser'
-

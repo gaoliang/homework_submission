@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'get-finished/(?P<homework_id>\d+)/', get_finished, name='get_finished'),
     url(r'add-submission/(?P<homework_id>\d+)/', add_submission, name='add_submission'),
     url(r'submission-detail/(?P<submission_id>\d+)', submission_detail, name='submission_detail'),
-    url(r'list_my_submissions',list_my_submissions,name='list_my_submissions'),
-    url(r'get_my_submissions',get_my_submissions,name="get_my_submissions"),
+    url(r'list_my_submissions', list_my_submissions, name='list_my_submissions'),
+    url(r'get_my_submissions', get_my_submissions, name="get_my_submissions"),
     url(r'^$', index_view)
 ]

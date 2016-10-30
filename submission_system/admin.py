@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from submission_system.models import Courser, Homework, HomeworkAnswer
+from submission_system.models import Courser, Homework, HomeworkAnswer, Part
 
 
 class HomeworkAnswerInline(admin.TabularInline):
@@ -24,3 +24,4 @@ class HomeworkAnswerAdmin(admin.ModelAdmin):
 admin.site.register(Courser)
 admin.site.register(Homework, HomeworkAdmin)
 admin.site.register(HomeworkAnswer, HomeworkAnswerAdmin)
+admin.site.register(Part)

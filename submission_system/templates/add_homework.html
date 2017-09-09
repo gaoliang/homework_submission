@@ -9,7 +9,7 @@
     <div class="container">
         <h1>新建{{ courser.name }}作业</h1>
         <hr>
-        <form method="post">
+        <form method="post" id="main_form">
             {% csrf_token %}
             <div class="form-group">
                 <label for="title_input">作业标题</label>
@@ -17,7 +17,7 @@
             </div>
             <textarea id="content" name="content" data-provide="markdown" rows="10"></textarea>
             <hr/>
-            <button type="submit" class="btn">保存并布置作业</button>
+            <button class="btn btn-success" onclick="submit()">保存并布置作业</button>
         </form>
     </div>
 {% endblock %}
@@ -29,6 +29,9 @@
     <script src="{% static 'js/highlight.pack.js' %}"></script>
     <script src="{% static 'js/tabIndent.js' %}"></script>
     <script>
+        function submit() {
+            $("#main_form").submit()
+        }
         (function ($) {
             $.fn.markdown.messages.zh = {
                 'Bold': "粗体",

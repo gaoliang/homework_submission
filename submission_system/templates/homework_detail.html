@@ -43,11 +43,13 @@
     <script src="{% static 'js/bootstrap-table.js' %}"></script>
     <script src="{% static 'js/bootstrap-table-zh-CN.js' %}"></script>
     <script>hljs.initHighlightingOnLoad();
-    $(window).load(function(){
- 
-    $(".panel-body img").addClass("img-responsive center-block");
- 
-})
+$(window).on('load', function () {
+
+        $(".panel-body img").addClass("img-responsive center-block");
+
+    })
+
+
 </script>
     {% if user.is_superuser %}
         <script>

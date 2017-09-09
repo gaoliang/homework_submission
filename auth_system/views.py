@@ -238,10 +238,6 @@ def login(request):
 
         if user is not None:
             if user.is_active:
-                # 删除该账号下其他活动的会话，防止多处登录
-                for s in Session.objects.all():
-                    if s.get_decoded().get('_auth_user_id') == str(user.id):
-                        s.delete()
                 auth.login(request, user)
                 # 如果用户不记住登陆，则设置为关闭浏览器之后清除登陆状态
                 if request.POST.get('remember_login') != 'true':
@@ -287,9 +283,9 @@ def forget_password(request):
     try:
         user = MyUser.objects.get(email__iexact=email)
         token = token_confirm.generate_validate_token(email)
-        message = "\n".join([u'{0}'.format(email), u'请访问该链接，完成修改密码：',
+        message = "\n".join([u'{0}'.format(email), u'请访问该链接，完成重置密码：',
                              '/'.join([current_site.domain, 'accounts', 'resetpassword', token])])
-        send_mail(u'注册用户验证信息', message, 'gaoliangim@qq.com', [email], fail_silently=False)
+        send_mail(u'校科协作业平台密码重置', message, 'gaoliangim@qq.com', [email], fail_silently=False)
         return JsonResponse({'valid': True, 'info': "请查收相关邮件以继续"})
     except ObjectDoesNotExist:
         return JsonResponse({"valid": False, "info": "此Email尚未注册本平台！"})

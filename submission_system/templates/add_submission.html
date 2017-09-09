@@ -15,7 +15,7 @@
                 <p>{{ homework.content|custom_markdown }}</p>
             </div>
         </div>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" id="main_form">
             {% csrf_token %}
             <label for="content">你的回答(编辑器支持markdown语法 <a href="http://www.jianshu.com/p/815788f4b01d">快速入门</a>)</label>
             <textarea id="content" name="content" data-provide="markdown" rows="10"></textarea>
@@ -24,7 +24,7 @@
             <label for=picture>如果你需要上传图片，请在这里选择</label>
             <input id="picture" accept="image/*" type="file" name='picture'>
             <hr>
-            <button type="submit" class="btn btn-success">提交</button>
+            <button class="btn btn-success" onclick="submit()">提交</button>
             <br>
             <br>
         </form>
@@ -38,6 +38,9 @@
     <script src="{% static 'js/highlight.pack.js' %}"></script>
     <script src="{% static 'js/tabIndent.js' %}"></script>
     <script>
+        function submit() {
+            $("#main_form").submit()
+        }
         (function ($) {
             $.fn.markdown.messages.zh = {
                 'Bold': "粗体",
@@ -71,10 +74,11 @@
         hljs.initHighlightingOnLoad();
         {#        实现textarea的tab键缩进功能#}
         document.body.enableTextareaDevTab();
-$(window).on('load', function() {
- 
-    $(".panel-body img").addClass("img-responsive center-block");
- 
-})   
- </script>
+        $(window).on('load', function () {
+
+            $(".panel-body img").addClass("img-responsive center-block");
+
+        })
+    </script>
 {% endblock %}
+

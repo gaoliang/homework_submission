@@ -18,7 +18,7 @@
 
                             {% if user.is_superuser %}{% url 'homework_detail' work.pk %}{% elif user.is_authenticated %}{% url 'add_submission' work.pk %}{% else %}#{% endif %}"
                             {% if not user.is_authenticated %} data-toggle="modal"
-                          data-target="#login-modal"{% endif %}>{{ work.name }}</a></p>
+                          data-target="#login-modal"{% endif %}>[{{ work.courser.name }}]{{ work.name }}</a></p>
                 </div>
             </div>
         {% endfor %}

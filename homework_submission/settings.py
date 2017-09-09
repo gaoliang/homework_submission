@@ -20,11 +20,11 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'local'
+SECRET_KEY = 'y9g6uml(l!91^xnnea)7rcfih4@+pz%b-x1tbc-$(mapze+zk1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -98,21 +98,23 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_FROM = 'local@sample.com'
-EMAIL_RECIPIENT_LIST = ['admin@sample.com']
-EMAIL_SUBJECT_PREFIX = '[WEBSITE] '
-
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_FROM = 'gaoliangim@qq.com'
+#EMAIL_RECIPIENT_LIST = ['admin@sample.com']
+#EMAIL_SUBJECT_PREFIX = '[WEBSITE] '
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # python -m smtpd -n -c DebuggingServer localhost:1025
-EMAIL_HOST = ''
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.qq.com'
 # EMAIL_PORT = 587
-EMAIL_PORT = 465
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'SAST_homework <gaoliangim@qq.com>'
 # EMAIL_USE_TLS = True
-EMAIL_USE_SSL = True
+#EMAIL_USE_SSL = True
 EMAIL_HOST_USER = EMAIL_FROM
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'wsmxjjtapnbsbaii'
 EMAIL_TIMEOUT = 5
 
 # Internationalization
@@ -138,7 +140,7 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 STATIC_ROOT = '/var/www/html/static'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/var/www/html/media'
 
 MEDIA_URL = '/media/'
 
